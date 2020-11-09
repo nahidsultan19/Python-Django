@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<table class="table table-borderless">
+    <thead class="border-bottom font-weight-bold">
+        <td>Song Title</td>
+        <td>Band Name</td>
+        <td>
+            <a href="{% url 'index'%}" class="btn btn-outline-primary">Add New</a>
+        </td>
+    </thead>
+    <tbody>
+        {% for song in song_list %}
+        <tr>
+            <td>{{ song.title }}</td>
+            <td>{{ song.band }}</td>
+            <td>
+                <a href="{% url 'song_update' song.id %}" class="btn text-secondary px-0"><i
+                        class="fa fa-edit fa-lg"></i></a>
+
+                <a href="{% url 'delete_song' song.id %}" class="btn"><i
+                        class="fa fa-trash fa-lg text-danger float-right"></i></a>
+                <!-- <button type="submit" class="btn"><i class="fa fa-trash fa-lg text-danger float-right"></i></button> -->
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

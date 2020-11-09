@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<ul class="list-group">
+    {% for item in todoItem %}
+
+    <li class="list-group-item">{{ item.title }}
+        <a href="{% url 'delete' item.id %}" class="btn btn-outline-danger"
+            style="display: inline-block; float:right; margin-left: 5px;"><i class="fa fa-trash fa-md"></i> Delete</a>
+        <a href="{% url 'update' item.id %}" class="btn btn-outline-info" style="display: inline-block; float:right"><i
+                class="fa fa-edit fa-md"></i> Update</a>
+
+    </li>
+    {% endfor %}
+</ul>
+
+<form action="/" method="POST" class="form-group">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-6 mt-3">
+            {{ form|crispy }}
+            <!-- <input type="text" name="content" class="form-control"> -->
+        </div>
+        <div class="col-md-6 mt-5">
+            <button type="submit" class="form-control btn btn-success btn-block"><i class="fa fa-database"></i>
+                Submit</button>
+        </div>
+    </div>
+
+</form>
+
+
+{% endblock %}

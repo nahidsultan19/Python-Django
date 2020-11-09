@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<p>Are you sure you want to delete "{{ songs }}"?</p>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-danger btn-sm" value="Yes, Delete">
+    <a href="{% url 'song_list' %}">Cancel</a>
+
+</form>
+
+
+{% endblock %}
