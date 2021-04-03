@@ -4,11 +4,12 @@ from django.http import HttpResponse
 from .models import *
 from .forms import *
 
+
 def home(request):
     context = {
         'todoItem': todoItem.objects.all(),
         'form': todoItemForm()
-        }
+    }
 
     if request.method == 'POST':
         form = todoItemForm(request.POST)
@@ -27,17 +28,16 @@ def updateTodo(request, pk):
         if form.is_valid():
             form.save()
             return redirect('/')
-    context = {'form':form}
+    context = {'form': form}
     return render(request, 'update.html', context)
 
 
 def deleteTodo(request, pk):
     item = todoItem.objects.get(id=pk)
-    
+
     if request.method == 'POST':
         item.delete()
         return redirect('/')
 
-    context = {'item':item}
+    context = {'item': item}
     return render(request, 'delete.html', context)
-
