@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'crud.apps.CrudConfig',
     'rest_framework',
 
+    'django_filters',
+    'bootstrapform',
+
 
 
 ]

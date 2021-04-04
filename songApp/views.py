@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from .models import Songs
 from .forms import SongsForm
 
+from .filters import SongsFilter
+
 
 def Song(request, pk=0):
     context = {
@@ -38,8 +40,14 @@ def Song(request, pk=0):
 
 
 def List(request):
+    song_list = Songs.objects.all()
+
+    # item filter
+    myFilter = SongsFilter(request.GET, queryset=song_list)
+    song_list = myFilter.qs
     context = {
-        'song_list': Songs.objects.all()
+        'song_list': song_list,
+        'myFilter': myFilter
     }
     return render(request, 'song_list.html', context)
 
